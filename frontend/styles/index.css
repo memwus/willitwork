@@ -1,22 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html { background-color: #0f0f0f; color: #e8e8e8; }
-  a { transition: color 0.2s; }
+  html {
+    background-color: #0a0a0a;
+    color: #d8d4cc;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+  }
+
+  a { transition: color 0.3s ease; }
+
+  ::selection {
+    background: #b8956a33;
+    color: #d8d4cc;
+  }
 }
 
 @layer components {
+
+  /* NAV */
+  .nav-link {
+    @apply text-waypoints-muted hover:text-waypoints-text;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #3a3830;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  /* GOLD RULE */
+  .gold-rule {
+    width: 40px;
+    height: 1px;
+    background: #b8956a;
+    display: block;
+  }
+
+  /* GALLERY GRID */
   .gallery-grid {
-    @apply grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+    gap: 2px;
   }
+
   .gallery-item {
-    @apply relative overflow-hidden cursor-pointer bg-waypoints-surface;
+    @apply relative overflow-hidden cursor-pointer;
     aspect-ratio: 4/3;
+    background: #111;
   }
-  .gallery-item img, .gallery-item video {
-    @apply w-full h-full object-cover transition-transform duration-500;
+
+  .gallery-item img,
+  .gallery-item video {
+    @apply w-full h-full object-cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
+    filter: brightness(0.88);
   }
-  .gallery-item:hover img, .gallery-item:hover video { @apply scale-105; }
+
+  .gallery-item:hover img,
+  .gallery-item:hover video {
+    transform: scale(1.04);
+    filter: brightness(0.5);
+  }
+
+  .gallery-item .gallery-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+  }
+
+  .gallery-overlay-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d8d4cc;
+  }
+
+  .gallery-overlay-sub {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #b8956a;
+    margin-top: 10px;
+  }
+
+  /* JOURNAL */
+  .journal-post-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.25;
+    color: #d8d4cc;
+    transition: color 0.3s;
+  }
+
+  .journal-post-title:hover {
+    color: #b8956a;
+  }
+
+  .journal-meta {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #3a3830;
+  }
+
+  /* PAGE HEADINGS */
+  .page-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: #d8d4cc;
+    line-height: 1.1;
+  }
+
+  /* PROSE OVERRIDES */
+  .waypoints-prose {
+    color: #9a9690;
+    font-size: 16px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .waypoints-prose p { margin-bottom: 1.5em; }
+
+  .waypoints-prose h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: #d8d4cc;
+    margin: 2em 0 0.75em;
+  }
+
+  .waypoints-prose a {
+    color: #b8956a;
+    text-decoration: none;
+    border-bottom: 1px solid #b8956a44;
+  }
+
+  .waypoints-prose a:hover {
+    border-color: #b8956a;
+  }
+
+  /* BUTTONS / LINKS */
+  .accent-link {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b8956a;
+    text-decoration: none;
+    border-bottom: 1px solid #b8956a66;
+    padding-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+
+  .accent-link:hover {
+    border-color: #b8956a;
+  }
+
+  /* FORM INPUTS */
+  .form-input {
+    @apply w-full rounded px-4 py-3 text-waypoints-text focus:outline-none transition-colors;
+    background: #111;
+    border: 1px solid #1e1e1e;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  .form-input:focus {
+    border-color: #b8956a44;
+  }
+
+  .form-input::placeholder {
+    color: #3a3830;
+  }
+
+  .form-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #5a5650;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+  }
 }
