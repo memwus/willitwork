@@ -6,7 +6,7 @@
     <title><%= [resource.data.title, site.metadata.title].compact.uniq.join(" — ") %></title>
     <meta name="description" content="<%= resource.data.description || site.metadata.description %>" />
     <%= live_reload_dev_js %>
-    <link rel="stylesheet" href="/bt-assets/static/index.css" />
+    <link rel="stylesheet" href="/assets/index.css" />
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="border-b border-waypoints-border">
@@ -36,6 +36,6 @@
       <video id="lightbox-video" controls class="max-h-[85vh] max-w-full hidden"></video>
       <p id="lightbox-caption" class="absolute bottom-5 left-0 right-0 text-center text-sm text-white/60"></p>
     </div>
-    <script src="/bt-assets/static/index.js"></script>
+    <script src="/assets/index.js"></script>
   </body>
 </html>
