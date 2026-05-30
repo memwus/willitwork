@@ -1,0 +1,6 @@
+.bundle/
+output/
+.bridgetown-cache/
+node_modules/
+.env
+*.log
