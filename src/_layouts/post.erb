@@ -1,21 +1,26 @@
 ---
 layout: default
 ---
-<article class="mx-auto max-w-2xl">
-  <header class="mb-10">
-    <h1 class="font-serif text-3xl sm:text-4xl text-waypoints-text mb-3"><%= resource.data.title %></h1>
-    <p class="text-sm text-waypoints-muted">
+<article class="mx-auto max-w-2xl px-8" style="padding-top:72px;padding-bottom:96px;">
+
+  <header style="margin-bottom:56px;">
+    <div class="journal-meta" style="margin-bottom:16px;">
       <time datetime="<%= resource.date.xmlschema %>"><%= resource.date.strftime("%B %-d, %Y") %></time>
-      <% if resource.data.location %>&nbsp;·&nbsp; <%= resource.data.location %><% end %>
-    </p>
+      <% if resource.data.location %>&nbsp;&nbsp;·&nbsp;&nbsp;<%= resource.data.location %><% end %>
+    </div>
+    <h1 class="page-heading" style="margin-bottom:20px;"><%= resource.data.title %></h1>
+    <span class="gold-rule"></span>
     <% if resource.data.cover_image %>
-      <img src="<%= resource.data.cover_image %>" alt="<%= resource.data.title %>" class="mt-6 w-full object-cover rounded" style="max-height:420px;" />
+      <img src="<%= resource.data.cover_image %>" alt="<%= resource.data.title %>"
+        style="width:100%;margin-top:40px;object-fit:cover;max-height:480px;filter:brightness(0.9);" />
     <% end %>
   </header>
-  <div class="prose prose-invert prose-lg max-w-none prose-headings:font-serif prose-a:text-waypoints-accent prose-a:no-underline hover:prose-a:underline">
+
+  <div class="waypoints-prose">
     <%= yield %>
   </div>
-  <footer class="mt-12 pt-6 border-t border-waypoints-border">
-    <a href="/journal/" class="text-sm text-waypoints-muted hover:text-waypoints-text">&larr; Back to Journal</a>
+
+  <footer style="margin-top:64px;padding-top:32px;border-top:1px solid #1a1a1a;">
+    <a href="/journal/" class="accent-link">&larr; Back to Journal</a>
   </footer>
 </article>
