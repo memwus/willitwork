@@ -1,12 +1,50 @@
 ---
 title: Waypoints
 layout: default
+galleries:
+  - title: "Travel"
+    url: "/photography/travel/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/travel.jpg"
+  - title: "Portraits"
+    url: "/photography/portraits/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/portraits.jpg"
+  - title: "Street"
+    url: "/photography/street/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/street.jpg"
+  - title: "Landscape"
+    url: "/photography/landscape/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/landscape.jpg"
+  - title: "Still Life"
+    url: "/photography/still-life/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/still-life.jpg"
+  - title: "Fine Art"
+    url: "/photography/fine-art/"
+    thumb: "https://your-bucket.backblazeb2.com/covers/fine-art.jpg"
 ---
-<section class="py-16 sm:py-24 text-center">
-  <h1 class="font-serif text-4xl sm:text-6xl text-waypoints-text mb-4">Waypoints</h1>
-  <p class="text-waypoints-muted text-lg italic font-serif"><%= site.metadata.tagline %></p>
-</section>
+
+<%# Gallery grid %>
 <section class="mb-16">
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+    <% resource.data.galleries.each do |gallery| %>
+      <a href="<%= gallery['url'] %>" class="group relative overflow-hidden block bg-waypoints-surface" style="aspect-ratio: 4/3;">
+        <img
+          src="<%= gallery['thumb'] %>"
+          alt="<%= gallery['title'] %>"
+          loading="lazy"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+          <span class="text-white font-serif text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 tracking-wide">
+            <%= gallery['title'] %>
+          </span>
+        </div>
+      </a>
+    <% end %>
+  </div>
+</section>
+
+<%# Journal %>
+<section>
   <h2 class="text-xs uppercase tracking-widest text-waypoints-muted mb-6">Latest from the Journal</h2>
   <% posts = site.collections.posts.resources.sort_by(&:date).reverse.first(3) %>
   <% if posts.any? %>
@@ -20,6 +58,9 @@ layout: default
             <time datetime="<%= post.date.xmlschema %>"><%= post.date.strftime("%B %-d, %Y") %></time>
             <% if post.data.location %>&nbsp;·&nbsp; <%= post.data.location %><% end %>
           </p>
+          <% if post.data.excerpt %>
+            <p class="text-waypoints-muted text-sm mt-2 leading-relaxed"><%= post.data.excerpt %></p>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -27,14 +68,4 @@ layout: default
   <% else %>
     <p class="text-waypoints-muted">No posts yet — check back soon.</p>
   <% end %>
-</section>
-<section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-  <a href="/photography/" class="block bg-waypoints-surface border border-waypoints-border rounded p-8 hover:border-waypoints-accent transition-colors">
-    <h3 class="font-serif text-2xl mb-2">Photography</h3>
-    <p class="text-sm text-waypoints-muted">Stills from the road</p>
-  </a>
-  <a href="/motion/" class="block bg-waypoints-surface border border-waypoints-border rounded p-8 hover:border-waypoints-accent transition-colors">
-    <h3 class="font-serif text-2xl mb-2">Motion</h3>
-    <p class="text-sm text-waypoints-muted">Video &amp; moving image</p>
-  </a>
 </section>
