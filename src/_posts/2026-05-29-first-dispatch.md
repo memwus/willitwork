@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "First dispatch"
+title: "First Dispatch"
 date: 2026-05-29
-location: "Somewhere"
+location: "Hollywood, California"
 excerpt: "The first entry — a placeholder until the real dispatches begin."
 ---
 
