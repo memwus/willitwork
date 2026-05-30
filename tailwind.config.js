@@ -4,13 +4,19 @@ module.exports = {
     extend: {
       colors: {
         waypoints: {
-          bg: "#0f0f0f", surface: "#1a1a1a", border: "#2a2a2a",
-          text: "#e8e8e8", muted: "#888888", accent: "#c8a96e",
+          bg:      "#0a0a0a",
+          surface: "#111111",
+          border:  "#1e1e1e",
+          text:    "#d8d4cc",
+          muted:   "#5a5650",
+          dim:     "#3a3830",
+          accent:  "#b8956a",
         },
       },
       fontFamily: {
-        sans:  ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-        serif: ["Georgia", "Cambria", "Times New Roman", "serif"],
+        sans:    ["'Inter'", "system-ui", "-apple-system", "sans-serif"],
+        serif:   ["'Cormorant Garamond'", "Georgia", "serif"],
+        display: ["'Cormorant Garamond'", "Georgia", "serif"],
       },
     },
   },
