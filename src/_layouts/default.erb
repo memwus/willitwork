@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="bg-waypoints-bg text-waypoints-text">
+<html lang="en" style="background:#0a0a0a;color:#d8d4cc;">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,36 +8,51 @@
     <%= live_reload_dev_js %>
     <link rel="stylesheet" href="/assets/index.css" />
   </head>
-  <body class="min-h-screen flex flex-col">
-    <header class="border-b border-waypoints-border">
-      <nav class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
-        <a href="/" class="block">
-          <img src="/images/logo.png" alt="Waypoints" class="h-16 w-auto" />
-        </a>
-        <ul class="flex gap-8 text-sm tracking-wide text-waypoints-muted">
-          <li><a href="/photography/" class="hover:text-waypoints-text">Photography</a></li>
-          <li><a href="/journal/"     class="hover:text-waypoints-text">Journal</a></li>
-          <li><a href="/motion/"      class="hover:text-waypoints-text">Motion</a></li>
-          <li><a href="/about/"       class="hover:text-waypoints-text">About</a></li>
-          <li><a href="/contact/"     class="hover:text-waypoints-text">Contact</a></li>
+  <body class="min-h-screen flex flex-col" style="background:#0a0a0a;">
+
+    <%# Navigation %>
+    <header style="border-bottom: 1px solid #1a1a1a;">
+      <nav class="mx-auto max-w-6xl px-8 py-6 flex items-center justify-between">
+        <div>
+          <a href="/">
+            <img src="/images/logo.png" alt="Waypoints" class="h-14 w-auto" />
+          </a>
+          <p class="mt-1" style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:12px;color:#3a3830;letter-spacing:0.05em;">The future is unwritten…</p>
+        </div>
+        <ul class="flex gap-10">
+          <li><a href="/photography/" class="nav-link">Photography</a></li>
+          <li><a href="/motion/"      class="nav-link">Motion</a></li>
+          <li><a href="/journal/"     class="nav-link">Journal</a></li>
+          <li><a href="/about/"       class="nav-link">About</a></li>
+          <li><a href="/contact/"     class="nav-link">Contact</a></li>
         </ul>
       </nav>
     </header>
-    <main class="flex-1 mx-auto w-full max-w-5xl px-6 py-12">
+
+    <%# Main %>
+    <main class="flex-1">
       <%= yield %>
     </main>
-    <footer class="border-t border-waypoints-border">
-      <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-waypoints-muted">
-        <span>Copyright &copy; <%= Time.now.year %> DJZ</span>
-        <span class="italic font-serif"><%= site.metadata.tagline %></span>
+
+    <%# Footer %>
+    <footer style="border-top:1px solid #1a1a1a;margin-top:80px;">
+      <div class="mx-auto max-w-6xl px-8 py-8 flex items-center justify-between">
+        <span style="font-size:10px;letter-spacing:0.15em;color:#3a3830;">&copy; <%= Time.now.year %> Waypoints</span>
+        <span style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:13px;color:#3a3830;">The future is unwritten…</span>
       </div>
     </footer>
-    <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
-      <button onclick="document.getElementById('lightbox').classList.add('hidden');document.body.style.overflow='';" class="absolute top-5 right-6 text-white/60 hover:text-white text-3xl leading-none">&times;</button>
-      <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-full object-contain hidden" />
-      <video id="lightbox-video" controls class="max-h-[85vh] max-w-full hidden"></video>
-      <p id="lightbox-caption" class="absolute bottom-5 left-0 right-0 text-center text-sm text-white/60"></p>
+
+    <%# Lightbox %>
+    <div id="lightbox" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.95);">
+      <button onclick="document.getElementById('lightbox').classList.add('hidden');document.body.style.overflow='';"
+        style="position:absolute;top:24px;right:32px;color:rgba(216,212,204,0.4);font-size:28px;background:none;border:none;cursor:pointer;line-height:1;transition:color 0.3s;"
+        onmouseover="this.style.color='#d8d4cc'" onmouseout="this.style.color='rgba(216,212,204,0.4)'"
+      >&times;</button>
+      <img id="lightbox-img" src="" alt="" class="hidden" style="max-height:88vh;max-width:100%;object-fit:contain;" />
+      <video id="lightbox-video" controls class="hidden" style="max-height:88vh;max-width:100%;"></video>
+      <p id="lightbox-caption" style="position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:0.15em;color:rgba(216,212,204,0.4);"></p>
     </div>
+
     <script src="/assets/index.js"></script>
   </body>
 </html>
