@@ -8,7 +8,8 @@ const path = require("path")
 const isProduction = process.argv.includes("--minify") ||
   process.env.BRIDGETOWN_ENV === "production"
 
-const outdir   = path.join(__dirname, "../output/bt-assets/static")
+// Write into src/assets — Bridgetown will copy this into output/
+const outdir   = path.join(__dirname, "../src/assets")
 const cacheDir = path.join(__dirname, "../.bridgetown-cache/frontend-bundling")
 
 fs.mkdirSync(outdir,   { recursive: true })
@@ -25,29 +26,28 @@ const postCSSPlugin = {
   },
 }
 
-// Build JS
-esbuild.build({
-  entryPoints: { "index": "./frontend/javascript/index.js" },
-  bundle: true,
-  outdir,
-  minify: isProduction,
-  entryNames: "[name]",
-}).then(() => console.log("✅ JS done")).catch((err) => { console.error(err); process.exit(1) })
-
-// Build CSS separately
-esbuild.build({
-  entryPoints: { "index": "./frontend/styles/index.css" },
-  bundle: true,
-  outdir,
-  minify: isProduction,
-  plugins: [postCSSPlugin],
-  entryNames: "[name]",
-  loader: { ".css": "css" },
-}).then(() => {
+Promise.all([
+  esbuild.build({
+    entryPoints: { "index": "./frontend/javascript/index.js" },
+    bundle: true,
+    outdir,
+    minify: isProduction,
+    entryNames: "[name]",
+  }),
+  esbuild.build({
+    entryPoints: { "index": "./frontend/styles/index.css" },
+    bundle: true,
+    outdir,
+    minify: isProduction,
+    plugins: [postCSSPlugin],
+    entryNames: "[name]",
+    loader: { ".css": "css" },
+  }),
+]).then(() => {
   const manifest = {
-    "index.js":  "/bt-assets/static/index.js",
-    "index.css": "/bt-assets/static/index.css",
+    "index.js":  "/assets/index.js",
+    "index.css": "/assets/index.css",
   }
   fs.writeFileSync(path.join(cacheDir, "manifest.json"), JSON.stringify(manifest, null, 2))
-  console.log("✅ CSS done")
+  console.log("✅ Frontend build complete — written to src/assets/")
 }).catch((err) => { console.error(err); process.exit(1) })
