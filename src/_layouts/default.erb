@@ -10,8 +10,10 @@
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="border-b border-waypoints-border">
-      <nav class="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-        <a href="/" class="font-serif text-xl text-waypoints-text hover:text-waypoints-accent">Waypoints</a>
+      <nav class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+        <a href="/" class="block">
+          <img src="/images/logo.png" alt="Waypoints" class="h-12 w-auto" />
+        </a>
         <ul class="flex gap-8 text-sm tracking-wide text-waypoints-muted">
           <li><a href="/journal/"     class="hover:text-waypoints-text">Journal</a></li>
           <li><a href="/photography/" class="hover:text-waypoints-text">Photography</a></li>
@@ -26,7 +28,7 @@
     </main>
     <footer class="border-t border-waypoints-border">
       <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-waypoints-muted">
-        <span>&copy; <%= Time.now.year %> Waypoints</span>
+        <a href="/"><img src="/images/logo.png" alt="Waypoints" class="h-6 w-auto opacity-50" /></a>
         <span class="italic font-serif"><%= site.metadata.tagline %></span>
       </div>
     </footer>
