@@ -22,21 +22,16 @@ galleries:
     thumb: "https://your-bucket.backblazeb2.com/covers/fine-art.jpg"
 ---
 
-<%# Gallery grid %>
-<section class="mb-16">
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<%# Gallery grid — edge to edge %>
+<section style="margin:2px;">
+  <div class="gallery-grid">
     <% resource.data.galleries.each do |gallery| %>
-      <a href="<%= gallery['url'] %>" class="group relative overflow-hidden block bg-waypoints-surface" style="aspect-ratio: 4/3;">
-        <img
-          src="<%= gallery['thumb'] %>"
-          alt="<%= gallery['title'] %>"
-          loading="lazy"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-          <span class="text-white font-serif text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 tracking-wide">
-            <%= gallery['title'] %>
-          </span>
+      <a href="<%= gallery['url'] %>" class="gallery-item">
+        <img src="<%= gallery['thumb'] %>" alt="<%= gallery['title'] %>" loading="lazy" />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-title"><%= gallery['title'] %></span>
+          <span class="gold-rule" style="margin-top:12px;"></span>
+          <span class="gallery-overlay-sub">View Gallery</span>
         </div>
       </a>
     <% end %>
@@ -44,28 +39,34 @@ galleries:
 </section>
 
 <%# Journal %>
-<section>
-  <h2 class="text-xs uppercase tracking-widest text-waypoints-muted mb-6">Latest from the Journal</h2>
+<section class="mx-auto max-w-3xl px-8" style="margin-top:96px;margin-bottom:96px;">
+
+  <div class="section-label" style="padding-bottom:24px;border-bottom:1px solid #1a1a1a;margin-bottom:48px;">
+    Latest from the Journal
+  </div>
+
   <% posts = site.collections.posts.resources.sort_by(&:date).reverse.first(3) %>
   <% if posts.any? %>
-    <div class="space-y-6">
+    <div>
       <% posts.each do |post| %>
-        <div class="border-b border-waypoints-border pb-6">
-          <h3 class="font-serif text-xl mb-1">
-            <a href="<%= post.relative_url %>" class="text-waypoints-text hover:text-waypoints-accent"><%= post.data.title %></a>
-          </h3>
-          <p class="text-sm text-waypoints-muted">
+        <div style="padding:32px 0;border-bottom:1px solid #141414;">
+          <div class="journal-meta" style="margin-bottom:10px;">
             <time datetime="<%= post.date.xmlschema %>"><%= post.date.strftime("%B %-d, %Y") %></time>
-            <% if post.data.location %>&nbsp;·&nbsp; <%= post.data.location %><% end %>
-          </p>
+            <% if post.data.location %>&nbsp;&nbsp;·&nbsp;&nbsp;<%= post.data.location %><% end %>
+          </div>
+          <a href="<%= post.relative_url %>" class="journal-post-title" style="display:block;margin-bottom:12px;">
+            <%= post.data.title %>
+          </a>
           <% if post.data.excerpt %>
-            <p class="text-waypoints-muted text-sm mt-2 leading-relaxed"><%= post.data.excerpt %></p>
+            <p style="font-size:14px;line-height:1.8;color:#5a5650;font-weight:300;"><%= post.data.excerpt %></p>
           <% end %>
         </div>
       <% end %>
     </div>
-    <a href="/journal/" class="inline-block mt-6 text-sm text-waypoints-accent hover:underline">All posts &rarr;</a>
+    <div style="margin-top:48px;">
+      <a href="/journal/" class="accent-link">All posts &rarr;</a>
+    </div>
   <% else %>
-    <p class="text-waypoints-muted">No posts yet — check back soon.</p>
+    <p style="color:#3a3830;font-size:14px;">No posts yet — check back soon.</p>
   <% end %>
 </section>
