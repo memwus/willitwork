@@ -1,0 +1,40 @@
+---
+title: Waypoints
+layout: default
+---
+<section class="py-16 sm:py-24 text-center">
+  <h1 class="font-serif text-4xl sm:text-6xl text-waypoints-text mb-4">Waypoints</h1>
+  <p class="text-waypoints-muted text-lg italic font-serif"><%= site.metadata.tagline %></p>
+</section>
+<section class="mb-16">
+  <h2 class="text-xs uppercase tracking-widest text-waypoints-muted mb-6">Latest from the Journal</h2>
+  <% posts = site.collections.posts.resources.sort_by(&:date).reverse.first(3) %>
+  <% if posts.any? %>
+    <div class="space-y-6">
+      <% posts.each do |post| %>
+        <div class="border-b border-waypoints-border pb-6">
+          <h3 class="font-serif text-xl mb-1">
+            <a href="<%= post.relative_url %>" class="text-waypoints-text hover:text-waypoints-accent"><%= post.data.title %></a>
+          </h3>
+          <p class="text-sm text-waypoints-muted">
+            <time datetime="<%= post.date.xmlschema %>"><%= post.date.strftime("%B %-d, %Y") %></time>
+            <% if post.data.location %>&nbsp;·&nbsp; <%= post.data.location %><% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <a href="/journal/" class="inline-block mt-6 text-sm text-waypoints-accent hover:underline">All posts &rarr;</a>
+  <% else %>
+    <p class="text-waypoints-muted">No posts yet — check back soon.</p>
+  <% end %>
+</section>
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <a href="/photography/" class="block bg-waypoints-surface border border-waypoints-border rounded p-8 hover:border-waypoints-accent transition-colors">
+    <h3 class="font-serif text-2xl mb-2">Photography</h3>
+    <p class="text-sm text-waypoints-muted">Stills from the road</p>
+  </a>
+  <a href="/motion/" class="block bg-waypoints-surface border border-waypoints-border rounded p-8 hover:border-waypoints-accent transition-colors">
+    <h3 class="font-serif text-2xl mb-2">Motion</h3>
+    <p class="text-sm text-waypoints-muted">Video &amp; moving image</p>
+  </a>
+</section>

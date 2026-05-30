@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="mx-auto max-w-2xl">
+  <header class="mb-10">
+    <h1 class="font-serif text-3xl sm:text-4xl text-waypoints-text mb-3"><%= resource.data.title %></h1>
+    <p class="text-sm text-waypoints-muted">
+      <time datetime="<%= resource.date.xmlschema %>"><%= resource.date.strftime("%B %-d, %Y") %></time>
+      <% if resource.data.location %>&nbsp;·&nbsp; <%= resource.data.location %><% end %>
+    </p>
+    <% if resource.data.cover_image %>
+      <img src="<%= resource.data.cover_image %>" alt="<%= resource.data.title %>" class="mt-6 w-full object-cover rounded" style="max-height:420px;" />
+    <% end %>
+  </header>
+  <div class="prose prose-invert prose-lg max-w-none prose-headings:font-serif prose-a:text-waypoints-accent prose-a:no-underline hover:prose-a:underline">
+    <%= yield %>
+  </div>
+  <footer class="mt-12 pt-6 border-t border-waypoints-border">
+    <a href="/journal/" class="text-sm text-waypoints-muted hover:text-waypoints-text">&larr; Back to Journal</a>
+  </footer>
+</article>

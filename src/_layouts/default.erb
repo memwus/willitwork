@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" class="bg-waypoints-bg text-waypoints-text">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= [resource.data.title, site.metadata.title].compact.uniq.join(" — ") %></title>
+    <meta name="description" content="<%= resource.data.description || site.metadata.description %>" />
+    <%= live_reload_dev_js %>
+    <link rel="stylesheet" href="/bt-assets/static/index.css" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-waypoints-border">
+      <nav class="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
+        <a href="/" class="font-serif text-xl text-waypoints-text hover:text-waypoints-accent">Waypoints</a>
+        <ul class="flex gap-8 text-sm tracking-wide text-waypoints-muted">
+          <li><a href="/journal/"     class="hover:text-waypoints-text">Journal</a></li>
+          <li><a href="/photography/" class="hover:text-waypoints-text">Photography</a></li>
+          <li><a href="/motion/"      class="hover:text-waypoints-text">Motion</a></li>
+          <li><a href="/about/"       class="hover:text-waypoints-text">About</a></li>
+          <li><a href="/contact/"     class="hover:text-waypoints-text">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="flex-1 mx-auto w-full max-w-5xl px-6 py-12">
+      <%= yield %>
+    </main>
+    <footer class="border-t border-waypoints-border">
+      <div class="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-waypoints-muted">
+        <span>&copy; <%= Time.now.year %> Waypoints</span>
+        <span class="italic font-serif"><%= site.metadata.tagline %></span>
+      </div>
+    </footer>
+    <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+      <button onclick="document.getElementById('lightbox').classList.add('hidden');document.body.style.overflow='';" class="absolute top-5 right-6 text-white/60 hover:text-white text-3xl leading-none">&times;</button>
+      <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-full object-contain hidden" />
+      <video id="lightbox-video" controls class="max-h-[85vh] max-w-full hidden"></video>
+      <p id="lightbox-caption" class="absolute bottom-5 left-0 right-0 text-center text-sm text-white/60"></p>
+    </div>
+    <script src="/bt-assets/static/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { background-color: #0f0f0f; color: #e8e8e8; }
+  a { transition: color 0.2s; }
+}
+
+@layer components {
+  .gallery-grid {
+    @apply grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .gallery-item {
+    @apply relative overflow-hidden cursor-pointer bg-waypoints-surface;
+    aspect-ratio: 4/3;
+  }
+  .gallery-item img, .gallery-item video {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+  .gallery-item:hover img, .gallery-item:hover video {
+    @apply scale-105;
+  }
+}

@@ -1,0 +1,24 @@
+---
+title: Photography
+layout: default
+permalink: /photography/
+images:
+  - src: "https://your-bucket.backblazeb2.com/photography/photo-001.jpg"
+    thumb: "https://your-bucket.backblazeb2.com/photography/thumbs/photo-001.jpg"
+    caption: ""
+---
+<section>
+  <h1 class="font-serif text-3xl sm:text-4xl mb-10">Photography</h1>
+  <% images = resource.data.images %>
+  <% if images && images.any? %>
+    <div class="gallery-grid">
+      <% images.each do |item| %>
+        <div class="gallery-item rounded" data-lightbox data-src="<%= item['src'] %>" data-type="image" data-caption="<%= item['caption'] %>">
+          <img src="<%= item['thumb'] || item['src'] %>" alt="<%= item['caption'] %>" loading="lazy" />
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-waypoints-muted">No photographs yet.</p>
+  <% end %>
+</section>
